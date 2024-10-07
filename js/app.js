@@ -1,3 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-  initTodo();
+document.addEventListener("DOMContentLoaded", async () => {
+    await initTodo();
 });
