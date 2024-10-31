@@ -37,7 +37,7 @@ Here is a step-by-step guide for implementing Firebase Authentication in a web a
 </html>
 ```
 
-### 5. Configure Firebase and Implement Authentication
+### 5. Configure Firebase and Implement Authentication (This is inside the auth.js)
 
 Replace the Firebase config object with the credentials provided in your Firebase console.
 
@@ -52,9 +52,6 @@ const firebaseConfig = {
     appId: "YOUR_APP_ID"
 };
 
-firebase.initializeApp(firebaseConfig);
-
-const auth = firebase.auth();
 ```
 Here you are creating a variable that represents your firebase configuration. This is where you will put all of the sensitive information that firebase gives you.
 This config variable is responsible for linking your firebase account so you can make changes to it. REMEMBER, NEVER SHARE THIS INFORMATION WITH ANYONE!!!!
@@ -64,9 +61,40 @@ After you initialize your connection to firebase (firebaseConfig variable), you 
 firebase.initializeApp(firebaseConfig);
 ```
 
-This is when you connection to firebase is completed.
+At this point the connection to firebase is completed... Congrats!
 
-The next step is 
+The next step is to implement the actual authentication. To be able to access firebase authentication functions, you need to write this line of code:
+```javascript
+const auth = firebase.auth();
+```
+This line of code gives you access to the authentication that you setup in firebase earlier in this tutorial. We will see its uses later on.
+
+### Write Authentication Functions (This is inside the auth.js)
+
+The next step is to write some convenience functions so that we can avoid repeating code. If you are unfamiliar with functions in javascript, please refer to this: [Functions](https://www.w3schools.com/js/js_functions.asp).
+
+First lets write a signUp function to facilitate the user signing in with their email and password.
+
+```javascript
+function signUp(email, password) {
+    const user = auth.createUserWithEmailAndPassword(email, password);
+    return user
+}
+```
+Here the arguments supplied to the function are the user's email and password, when the function is called with those arguments, the firebase function
+createUserWithEmailAndPassword() is triggered. This function creates a new user with the email and password and then returns it back.
+
+Similarly, we can use other firebase authentications functions to do other actions:
+```javascript
+function login(email, password) {
+    return auth.signInWithEmailAndPassword(email, password);
+}
+
+function logout() {
+    return auth.signOut();
+}
+```
+
 ### Explanation of Key Parts
 
 - **Sign Up**: `createUserWithEmailAndPassword(auth, email, password)` creates a new user with the given email and password.
