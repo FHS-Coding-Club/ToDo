@@ -1,5 +1,3 @@
-Here is a step-by-step guide for implementing Firebase Authentication in a web application using only vanilla JavaScript, HTML, and CSS. This example will cover setting up Firebase, configuring it in your JavaScript, and providing basic sign-in and sign-up features with Firebase's authentication services.
-
 ### 1. Set Up Firebase
 
 1. Go to [Firebase Console](https://console.firebase.google.com/).
@@ -95,11 +93,17 @@ function logout() {
 }
 ```
 
+### State Management
+Something that we always want to do in our application is keep track of the state of the user. For example, we always want to know if the user is logged in or not so that we can display different things on the screen. we can do this using the onAuthChanged functionf from firebase. This function is a event listener that triggers every time the user is logged in. If you don't know what a event listener is, please refer to this: [Event Listeners](https://www.w3schools.com/js/js_htmldom_eventlistener.asp). This is the functions here:
+```javascript
+function onAuthStateChanged(callback) {
+    return auth.onAuthStateChanged(callback);
+}
+```
+
 ### Explanation of Key Parts
 
 - **Sign Up**: `createUserWithEmailAndPassword(auth, email, password)` creates a new user with the given email and password.
 - **Sign In**: `signInWithEmailAndPassword(auth, email, password)` signs in an existing user.
 - **Sign Out**: `signOut(auth)` signs out the current user.
 - **onAuthStateChanged**: This listener checks for changes in the authentication state, updating the UI based on whether a user is logged in.
-
-This setup provides a complete basic authentication flow using Firebase in a pure HTML, CSS, and JavaScript environment.
