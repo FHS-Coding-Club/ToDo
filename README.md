@@ -48,6 +48,23 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+function signUp(email, password) {
+  const user = auth.createUserWithEmailAndPassword(email, password);
+  return user;
+}
+
+function login(email, password) {
+  return auth.signInWithEmailAndPassword(email, password);
+}
+
+function logout() {
+  return auth.signOut();
+}
+
+function onAuthStateChanged(callback) {
+  return auth.onAuthStateChanged(callback);
+}
 ```
 
 ### 4: Set Up Authentication Methods
